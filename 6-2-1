@@ -1,0 +1,104 @@
+/*1.	Даны два массива: А[n] и B[m] (сгенерировать случайным образом). Необходимо создать еще два массива, в которые нужно собрать:
+•	Общие элементы двух массивов;
+•	Элементы массива A, которые не включаются в B;
+Повторов в новых массивах не должно быть! (т.е. если общий элемент повторяется в исходном массиве несколько раз, то в результирующем массиве он присутствует только один раз)
+*/
+#include <iostream>
+#include <time.h>
+#define N 7
+#define M 9
+using namespace std;
+void main()
+{
+	setlocale(LC_ALL, "rus");
+	srand(time(0));
+	int aArr[N], bArr[M], cArr[N], dArr[M];
+	int *ptrA = aArr, *ptrB = bArr,*ptrC,*ptrD;
+	int i, j;
+	cout << " Массив А[n] \n";
+	for (i = 0; i < N; i++, ptrA++)
+	{
+		*ptrA = rand() % 11-5;
+		cout << " " << *ptrA << "  ";
+	}
+	cout << endl;
+	cout << " Массив B[m] \n";
+	for (i = 0; i < M; i++, ptrB++)
+	{
+		*ptrB = rand() % 11-5;
+		cout << " " << *ptrB << "  ";
+	}
+	cout << endl;
+	
+	ptrA = aArr;
+	ptrC = cArr;
+	
+	while(ptrA<aArr+N-1)
+	{
+		int tmp=0;
+		ptrB = bArr;
+		while(ptrB<bArr+M-1)
+		{
+			if (*ptrA == *ptrB) {
+				tmp++;
+			}
+			ptrB++;
+		}
+		int *pptrA=aArr;
+		int k = 0;
+		while (pptrA<ptrA)
+		{
+			if (*ptrA == *pptrA) k++;
+			pptrA++;
+		}
+		if (tmp != 0 && k == 0) {
+			*ptrC = *ptrA;
+			ptrC++;
+		}
+		ptrA++;
+				
+	}
+	int *pptrC = cArr;
+	cout << " Общие элементы двух массивов \n";
+	while( pptrC < ptrC) 
+	{
+		cout << " " << *pptrC << "  ";
+		pptrC++;
+	}
+	cout << endl;
+	ptrA = aArr;
+	ptrD = dArr;
+	while (ptrA < aArr + N - 1)
+	{
+		ptrB = bArr;
+		int kol = 0;
+		while (ptrB < bArr + M - 1)
+		{
+			if (*ptrA == *ptrB) {
+				kol++;
+			}
+			ptrB++;
+		}
+		int tmp=0;
+		int *ptrAa = aArr;
+		while (ptrAa < ptrA)
+		{
+			if (*ptrAa == *ptrA)tmp++;
+			ptrAa++;
+		}
+		if (tmp==0&&kol==0) {
+			*ptrD = *ptrA;
+			ptrD++;
+		}
+		ptrA++;
+	}
+	int *pptrD = dArr;
+	cout << " Элементы массива A, которые не включаются в B \n";
+	while (pptrD < ptrD)
+	{
+		cout << " " << *pptrD << "  ";
+		pptrD++;
+	}
+	cout << endl;
+	system("pause");
+}
