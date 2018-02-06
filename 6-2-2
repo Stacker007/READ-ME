@@ -1,0 +1,48 @@
+/*Дан отсортированный по возрастанию массив целых чисел(заполнить случайными числами от 0 до 50, а затем отсортировать).
+Запросить у пользователя значение элемента. Если такой элемент имеется в массиве, то  удалить его (сдвинуть влево оставшуюся часть массива).
+Если такого элемента нет, то вывести сообщение. Использовать указатели для продвижения по массиву.*/
+#include <iostream>
+#include <time.h>
+#define N 10
+using namespace std;
+void main()
+{
+	setlocale(LC_ALL, "rus");
+	srand(time(0));
+	int arr[N];
+	int *ptr;
+	ptr = arr;
+	cout << " Исходный массив \n";
+	for (int i = 0; i < N; i++, ptr++)
+	{
+		*ptr = rand() % 51;
+		cout << " " << *ptr << "  ";
+	}
+	cout << endl;
+	ptr = arr;
+	int tmp;
+	int *ptrA = arr + N - 1;
+	while (ptrA>ptr)
+	{
+		int *pptr = arr;
+		while (pptr<ptrA)
+		{
+			if (*pptr >*(pptr+1))
+			{
+				tmp = *pptr;
+				*pptr = *(pptr+1);
+				*(pptr+1)= tmp;
+			}
+			pptr++;
+		}
+		ptrA--;
+	}
+	cout << " Отсортированный массив \n";
+	for (int i = 0; i < N; i++, ptr++)
+	{
+		cout << " " << *ptr << "  ";
+	}
+	cout << endl;
+
+	system("pause");
+}
