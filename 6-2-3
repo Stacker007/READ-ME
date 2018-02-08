@@ -1,0 +1,63 @@
+//Массив из 20 - ти элементов заполнить случайными числами от 0 до 20. Упорядочить элементы, стоящие на четных местах, по возрастанию, а на нечетных – по убыванию.
+#include <iostream>
+#include <time.h>
+#define N 20
+using namespace std;
+void main()
+{
+	setlocale(LC_ALL, "rus");
+	int arr[N];
+	int *ptr, *pptr;
+	srand(time(0));
+	cout << " Исходный массив \n";
+	ptr = arr;
+	for (int i = 0; i < N; i++, ptr++)
+	{
+		*ptr = rand() % 21;
+		cout << " " << *ptr << "  ";
+	}
+	cout << endl;
+	ptr = &arr[1];
+	int tmp;
+	int *ptrA = arr + N - 2;
+	while (ptrA>ptr)
+	{
+		int *pptr = &arr[1];
+		while (pptr<ptrA)
+		{
+			if (*pptr >*(pptr + 2))
+			{
+				tmp = *pptr;
+				*pptr = *(pptr + 2);
+				*(pptr + 2) = tmp;
+			}
+			pptr += 2;
+		}
+		ptrA-=2;
+	}
+	ptrA = arr + N - 1;
+	ptr = arr;
+	while (ptrA > ptr)
+	{
+		int *pptr = arr;
+		while (pptr < ptrA)
+		{
+			if (*pptr < *(pptr + 2))
+			{
+				tmp = *pptr;
+				*pptr = *(pptr + 2);
+				*(pptr + 2) = tmp;
+			}
+			pptr+=2;
+		}
+		ptrA-=2;
+	}
+	cout << " Отсортированный массив \n";
+	ptr = arr;
+	for (int i = 0; i < N; i++, ptr++)
+	{
+		cout << " " << *ptr << "  ";
+	}
+	cout << endl;
+	system("pause");
+}
