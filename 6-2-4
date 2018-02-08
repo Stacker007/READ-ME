@@ -1,0 +1,36 @@
+//Массив из 10-ти элементов заполнить случайными числами от 0 до 5. Пользуясь указателями, найти максимальное количество подряд идущих нулей.
+#include <iostream>
+#include <time.h>
+#define N 10
+using namespace std;
+void main()
+{
+	setlocale(LC_ALL, "rus");
+	srand(time(0));
+	int arr[N];
+	int *ptr=arr;
+	cout << " Исходный массив \n";
+	for (int i = 0; i < N; i++, ptr++)
+	{
+		*ptr = rand() % 6;
+		cout << " " << *ptr << "  ";
+	}
+	cout << endl;
+	int kol = 0;
+	int maxZero = 0;
+	ptr = arr;
+	for(;ptr<arr+N-1;ptr++)
+	{
+		if (*ptr == 0) {
+			int *nulPtr;
+			int nulKol = 1;
+			for (nulPtr = ptr + 1; nulPtr < arr + N; nulPtr++)
+			{
+				if (*nulPtr == 0)nulKol++;
+				else break;
+			}
+			if (nulKol > maxZero)maxZero = nulKol;
+		}
+	}
+	cout << " Максимальное количество подряд идущих нулей " << maxZero << endl;
+	system("pause");
