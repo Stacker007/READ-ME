@@ -1,0 +1,37 @@
+#include <iostream>
+#include <Windows.h>
+using namespace std;
+void main()
+{
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+	const int N = 5;
+	char str[N][80];
+	char *ptr[N];
+	cout << " Вводите строки:\n";
+	for (int i=0; i < N; i++)
+	{
+		cin >> str[i];
+		ptr[i] = str[i];
+	}
+	//сортировка
+	for (int k = N - 1; k > 0; k--)
+	{
+		for (int i = 0; i < k; i++)
+		{
+			if (*ptr[i] < *ptr[i + 1])
+			{
+				char *tmp;
+				tmp = ptr[i];
+				ptr[i] = ptr[i + 1];
+				ptr[i + 1] = tmp;
+			}
+		}
+	}
+	cout << " Полученный массив строк:\n";
+	for (int i = 0; i < N; i++)
+	{
+		cout << ptr[i] << endl;
+	}
+	system("pause");
+}
