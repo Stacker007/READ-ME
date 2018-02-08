@@ -59,8 +59,7 @@ void main()
 		}
 		if (flag == false)cout << " Такого числа нет в массиве \n";
 	} while (flag == false);
-	int size = N;
-	while (ptr < arr + size)
+	while (ptr < arr + N-1)
 	{
 		int tmp;
 		tmp = *ptr;
@@ -69,8 +68,7 @@ void main()
 		ptr++;
 	}
 	ptr = arr;
-	
-	while (ptr < arr+size-1)
+	while (ptr < arr+N-1)
 	{
 		cout << " " << *ptr << "  ";
 		ptr++;
